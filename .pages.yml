@@ -1,0 +1,116 @@
+# ===========================================================
+#  Pages CMS — o que pode ser editado no painel
+#  (não precisa alterar nada aqui para começar)
+# ===========================================================
+media:
+  - name: imagens
+    label: Imagens
+    input: content/uploads
+    output: /content/uploads
+    categories: [image]
+    extensions: [png, jpg, jpeg, webp, svg]
+  - name: arquivos
+    label: Arquivos
+    input: content/arquivos
+    output: /content/arquivos
+    categories: [document]
+
+content:
+  - name: banners
+    label: Banners do topo
+    type: file
+    path: content/banners.json
+    fields:
+      - name: banners
+        label: Banners
+        type: object
+        list: true
+        fields:
+          - { name: titulo, label: Título, type: string }
+          - { name: subtitulo, label: Subtítulo, type: text, required: false }
+          - { name: eyebrow, label: "Etiqueta (acima do título)", type: string, required: false }
+          - { name: imagem, label: Imagem de fundo, type: image, required: false }
+          - { name: cta, label: Texto do botão, type: string, required: false }
+          - { name: link, label: Link do botão, type: string, required: false }
+
+  - name: noticias
+    label: Notícias e atualizações
+    type: file
+    path: content/noticias.json
+    fields:
+      - name: noticias
+        label: Notícias
+        type: object
+        list: true
+        fields:
+          - { name: titulo, label: Título, type: string }
+          - name: categoria
+            label: Categoria
+            type: select
+            options:
+              values: [Boas práticas, Cases, Calendário, Indicadores, Comunidade, Comunicado]
+          - { name: data, label: Data, type: string, required: false }
+          - { name: imagem, label: Imagem, type: image, required: false }
+
+  - name: empresas
+    label: Status das empresas
+    type: file
+    path: content/empresas.json
+    fields:
+      - name: empresas
+        label: Empresas
+        type: object
+        list: true
+        fields:
+          - { name: nome, label: Nome, type: string }
+          - name: selo
+            label: Estágio
+            type: select
+            options:
+              values:
+                - { label: "Referência KO", value: "ref" }
+                - { label: "Em produção", value: "prod" }
+          - { name: kpiLabel, label: Rótulo do indicador, type: string }
+          - { name: kpi, label: "Indicador (número)", type: string, required: false }
+          - name: barColor
+            label: Cor da barra
+            type: select
+            options:
+              values:
+                - { label: "Verde (maduro)", value: "g" }
+                - { label: "Âmbar (evoluindo)", value: "y" }
+          - { name: barPct, label: "Barra (%)", type: number }
+          - { name: resp, label: Responsáveis, type: string }
+          - { name: atualizado, label: Atualizado em, type: string }
+
+  - name: indicadores
+    label: Report mensal (números)
+    type: file
+    path: content/indicadores.json
+    fields:
+      - { name: mes, label: Mês de referência, type: string }
+      - name: linhas
+        label: Linhas do report
+        type: object
+        list: true
+        fields:
+          - { name: empresa, label: Empresa, type: string }
+          - { name: base, label: Base elegível, type: string }
+          - { name: cadastrados, label: Cadastrados, type: string }
+          - { name: cobertos, label: Cobertos, type: string }
+          - { name: cobertura, label: "% cobertura", type: string }
+          - { name: faturamento, label: "% faturamento", type: string }
+
+  - name: relatorios
+    label: Relatórios mensais (arquivos)
+    type: file
+    path: content/relatorios.json
+    fields:
+      - name: relatorios
+        label: Arquivos
+        type: object
+        list: true
+        fields:
+          - { name: mes, label: Mês, type: string }
+          - { name: arquivo, label: Arquivo (Excel/PDF), type: file }
+          - { name: obs, label: Observação, type: text, required: false }

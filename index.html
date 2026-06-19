@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Comunidade B2B · Grupo José Alves · 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0A0A0A; --bg-2:#121212; --bg-3:#171717; --raise:#1C1C1C;
+    --line:rgba(255,255,255,.09); --line-2:rgba(255,255,255,.16);
+    --red:#E61C24; --red-dim:#B5151C; --red-soft:rgba(230,28,36,.14);
+    --gold:#C9A84C; --gold-soft:#E8C96A; --gold-bg:rgba(201,168,76,.13);
+    --green:#22A854; --green-bg:rgba(34,168,84,.14);
+    --white:#FAFAFA; --muted:#8E8E8E; --faint:#5C5C5C;
+    --r:14px; --r-sm:9px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{margin:0; background:var(--bg); color:var(--white);
+    font-family:"DM Sans",system-ui,sans-serif; font-size:16px; line-height:1.6;
+    -webkit-font-smoothing:antialiased;}
+  ::selection{background:var(--red); color:#fff;}
+  a{color:inherit; text-decoration:none;}
+  .wrap{max-width:1080px; margin:0 auto; padding:0 26px;}
+  .bebas{font-family:"Bebas Neue",sans-serif; letter-spacing:.02em; font-weight:400;}
+
+  /* NAV */
+  header{position:sticky; top:0; z-index:60; background:rgba(10,10,10,.82); backdrop-filter:blur(12px); border-bottom:1px solid var(--line);}
+  .nav{display:flex; align-items:center; justify-content:space-between; height:68px;}
+  .brand{display:flex; align-items:center; gap:12px;}
+  .brand .mark{font-family:"Bebas Neue"; font-size:24px; line-height:1; color:#fff; background:var(--red); padding:6px 9px 3px; border-radius:7px; letter-spacing:.04em;}
+  .brand .mark-img{height:42px; width:42px; object-fit:contain; border-radius:9px; background:#F3F3F3; padding:2px; display:block;}
+  .brand .nm{font-family:"Bebas Neue"; font-size:19px; letter-spacing:.05em; line-height:1;}
+  .brand .sb{font-size:10.5px; color:var(--muted); letter-spacing:.18em; text-transform:uppercase;}
+  .menu{display:flex; gap:2px;}
+  .menu button{font:inherit; font-size:12.5px; letter-spacing:.06em; text-transform:uppercase; color:var(--muted); background:none; border:0; padding:9px 13px; border-radius:7px; cursor:pointer; transition:.15s;}
+  .menu button:hover{color:var(--white);}
+  .menu button.active{color:#fff; background:var(--red-soft);}
+  .menu button.active::before{content:attr(data-n); color:var(--red); margin-right:6px; font-family:"Bebas Neue"; letter-spacing:.05em;}
+  .yr{font-family:"Bebas Neue"; font-size:15px; color:var(--gold); letter-spacing:.1em; padding-left:6px;}
+  .yr-logo{height:34px; background:#fff; border-radius:7px; padding:3px 8px; object-fit:contain; display:block;}
+  .burger{display:none; background:none; border:0; cursor:pointer; font-size:26px; color:#fff;}
+
+  .page{display:none;}
+  .page.active{display:block; animation:rise .45s ease;}
+  @keyframes rise{from{opacity:0; transform:translateY(10px);} to{opacity:1; transform:none;}}
+  @media(prefers-reduced-motion:reduce){.page{animation:none;} html{scroll-behavior:auto;}}
+
+  /* SECTION HEADERS — RotaVP style */
+  .eyebrow{font-size:11.5px; letter-spacing:.22em; text-transform:uppercase; color:var(--gold); display:flex; align-items:center; gap:10px;}
+  .eyebrow::before{content:attr(data-n); font-family:"Bebas Neue"; font-size:16px; color:var(--red); letter-spacing:.05em;}
+  .big-title{font-family:"Bebas Neue"; font-size:clamp(46px,9vw,104px); line-height:.86; letter-spacing:.01em; margin:14px 0 0;}
+  .big-title .l2{color:var(--red);}
+
+  /* HERO */
+  .hero{padding:72px 0 26px; position:relative;}
+  .hero h1{font-family:"Bebas Neue"; font-size:clamp(52px,10vw,118px); line-height:.84; letter-spacing:.01em; margin:18px 0 22px;}
+  .hero h1 .rd{color:var(--red);}
+  .hero .sub{font-size:18px; color:#C4C4C4; max-width:56ch; font-weight:300;}
+  .statstrip{display:grid; grid-template-columns:repeat(2,1fr); gap:0; border-top:1px solid var(--line); border-bottom:1px solid var(--line); margin-top:44px;}
+  .statstrip .s{padding:26px 4px;}
+  .statstrip .s + .s{border-left:1px solid var(--line);}
+  .statstrip .num{font-family:"Bebas Neue"; font-size:54px; line-height:.9; color:#fff;}
+  .statstrip .num .u{color:var(--gold); font-size:30px;}
+  .statstrip .lb{font-size:12px; letter-spacing:.14em; text-transform:uppercase; color:var(--muted); margin-top:4px;}
+  .banner{position:relative; border-radius:var(--r); overflow:hidden; min-height:300px; margin-top:30px; background:var(--bg-2); border:1px solid var(--line);}
+  .banner .slide{position:absolute; inset:0; opacity:0; transition:opacity .6s ease; display:flex; flex-direction:column; justify-content:center; padding:42px 46px;}
+  .banner .slide.on{opacity:1;}
+  .banner .bg{position:absolute; inset:0; background-size:cover; background-position:center;}
+  .banner .scrim{position:absolute; inset:0; background:linear-gradient(90deg, rgba(10,10,10,.92), rgba(10,10,10,.55) 55%, rgba(10,10,10,.2));}
+  .banner .scrim.noimg{background:radial-gradient(130% 150% at 100% 0%, rgba(230,28,36,.20), transparent 55%), var(--bg-2);}
+  .banner .c{position:relative; max-width:62%; z-index:2;}
+  .banner .eyb{font-size:11.5px; letter-spacing:.2em; text-transform:uppercase; color:var(--gold);}
+  .banner h2.bt{font-family:"Bebas Neue"; font-size:clamp(30px,5.2vw,54px); line-height:.9; letter-spacing:.01em; margin:12px 0 10px;}
+  .banner .bs{color:#C9D2E0; font-size:16px; max-width:48ch; line-height:1.5;}
+  .banner .cta{display:inline-block; margin-top:16px; background:var(--red); color:#fff; padding:9px 17px; border-radius:8px; font-size:13px; font-weight:500;}
+  .banner .nav-b{position:absolute; top:50%; transform:translateY(-50%); z-index:3; background:rgba(0,0,0,.42); border:1px solid var(--line-2); color:#fff; width:38px; height:38px; border-radius:50%; cursor:pointer; font-size:20px; line-height:1;}
+  .banner .nav-b.prev{left:14px;} .banner .nav-b.next{right:14px;}
+  .banner .dots{position:absolute; bottom:16px; left:46px; display:flex; gap:8px; z-index:3;}
+  .banner .dots b{width:8px; height:8px; border-radius:50%; background:rgba(255,255,255,.32); cursor:pointer;}
+  .banner .dots b.on{background:var(--red);}
+
+  /* MATURITY TRACK */
+  .block{margin-top:64px;}
+  .block .hd{display:flex; align-items:baseline; justify-content:space-between; gap:16px; flex-wrap:wrap; margin-bottom:24px;}
+  .block .hd h2{font-family:"Bebas Neue"; font-size:40px; line-height:1; letter-spacing:.03em; margin:0;}
+  .block .hd p{font-size:13.5px; color:var(--muted); margin:0;}
+  .track{background:var(--bg-2); border:1px solid var(--line); border-radius:var(--r); padding:34px 32px 30px;}
+  .rail{position:relative; height:3px; background:rgba(255,255,255,.1); border-radius:3px; margin:54px 8px 0;}
+  .rail .fill{position:absolute; left:0; top:0; height:100%; border-radius:3px; background:linear-gradient(90deg,var(--gold),var(--green));}
+  .stops{display:flex; justify-content:space-between; margin-top:-54px;}
+  .stop{flex:1; text-align:center;}
+  .stop .dot{width:16px; height:16px; border-radius:50%; background:var(--bg-2); border:3px solid var(--gold); margin:0 auto; position:relative; top:46px;}
+  .stop.mat .dot{border-color:var(--green);}
+  .stop .co{font-family:"Bebas Neue"; font-size:26px; letter-spacing:.04em; margin-top:54px; line-height:1;}
+  .stop .ph{font-size:12px; color:var(--muted); margin-top:6px;}
+  .stop .tag{display:inline-block; margin-top:9px; font-size:10.5px; letter-spacing:.1em; text-transform:uppercase; padding:4px 11px; border-radius:999px; background:var(--gold-bg); color:var(--gold-soft);}
+  .stop.mat .tag{background:var(--green-bg); color:#5BD98A;}
+  .stop .mcard{margin-top:54px; background:var(--bg-3); border:1px solid var(--line); border-radius:12px; padding:16px 14px 14px;}
+  .stop.mat .mcard{border-color:rgba(34,168,84,.35);}
+  .logoplate{background:#fff; border-radius:8px; height:62px; display:flex; align-items:center; justify-content:center; padding:8px 12px; margin-bottom:12px;}
+  .logoplate img{max-height:42px; max-width:92%; object-fit:contain; display:block;}
+
+  /* CARDS GRID */
+  .grid{display:grid; gap:16px;}
+  .g3{grid-template-columns:repeat(3,1fr);}
+  .g2{grid-template-columns:repeat(2,1fr);}
+  .card{background:var(--bg-2); border:1px solid var(--line); border-radius:var(--r); padding:22px;}
+
+  .co-card .top{display:flex; align-items:center; justify-content:space-between; margin-bottom:18px;}
+  .co-card .co-name{font-family:"Bebas Neue"; font-size:30px; letter-spacing:.03em; line-height:1;}
+  .pill{font-size:10.5px; letter-spacing:.1em; text-transform:uppercase; padding:5px 11px; border-radius:999px;}
+  .pill.ref{background:var(--green-bg); color:#5BD98A;}
+  .pill.prod{background:var(--gold-bg); color:var(--gold-soft);}
+  .co-card .kpi{font-family:"Bebas Neue"; font-size:48px; line-height:.9; color:#fff;}
+  .co-card .kpi.dim{color:var(--faint);}
+  .co-card .kpi-l{font-size:11.5px; letter-spacing:.1em; text-transform:uppercase; color:var(--muted); margin-bottom:14px;}
+  .co-card .bar{height:5px; border-radius:5px; background:rgba(255,255,255,.08); overflow:hidden; margin:16px 0 9px;}
+  .co-card .bar i{display:block; height:100%; border-radius:5px;}
+  .bar i.g{background:var(--green);} .bar i.y{background:var(--gold);}
+  .co-meta{display:flex; justify-content:space-between; font-size:11.5px; color:var(--faint);}
+
+  /* FEED */
+  .feed{border:1px solid var(--line); border-radius:var(--r); overflow:hidden; background:var(--bg-2);}
+  .feed .row{display:flex; align-items:center; gap:15px; padding:17px 22px; border-top:1px solid var(--line);}
+  .feed .row:first-child{border-top:0;}
+  .feed .ic{font-family:"Bebas Neue"; color:var(--red); font-size:20px; width:26px; text-align:center;}
+  .feed .txt{flex:1; font-size:14.5px;}
+  .feed .cat{font-size:10.5px; letter-spacing:.1em; text-transform:uppercase; color:var(--faint);}
+
+  /* TABLE */
+  .note{font-size:12.5px; color:var(--gold-soft); background:var(--gold-bg); border-radius:var(--r-sm); padding:11px 15px; margin-bottom:20px; display:flex; gap:10px; align-items:flex-start;}
+  table.rep{width:100%; border-collapse:collapse; background:var(--bg-2); border:1px solid var(--line); border-radius:var(--r); overflow:hidden;}
+  table.rep thead th{font-size:10.5px; text-transform:uppercase; letter-spacing:.1em; color:var(--muted); text-align:right; padding:16px; border-bottom:2px solid var(--red); font-weight:500;}
+  table.rep thead th:first-child{text-align:left;}
+  table.rep td{padding:18px 16px; border-bottom:1px solid var(--line); text-align:right;}
+  table.rep tr:last-child td{border-bottom:0;}
+  table.rep td:first-child{text-align:left; font-family:"Bebas Neue"; font-size:24px; letter-spacing:.03em;}
+  table.rep td.num{font-family:"Bebas Neue"; font-size:26px; letter-spacing:.02em; color:#fff;}
+  table.rep td.wait{color:var(--faint); font-style:italic; font-size:13px;}
+  .foot{font-size:12px; color:var(--muted); margin-top:16px; line-height:1.7;}
+  .foot b{color:#C9C9C9; font-weight:600;}
+
+  /* LIBRARY */
+  .lib{display:flex; flex-direction:column; gap:12px;}
+  .lib .ic{font-family:"Bebas Neue"; font-size:30px; color:var(--gold); line-height:1;}
+  .lib h3{font-family:"Bebas Neue"; font-size:24px; letter-spacing:.03em; margin:0;}
+  .lib p{font-size:13px; color:var(--muted); margin:0; flex:1; line-height:1.55;}
+  .lib .meta{font-size:10.5px; letter-spacing:.08em; text-transform:uppercase; color:var(--faint);}
+
+  /* PHASES */
+  .phase{position:relative; padding-left:30px;}
+  .phase::before{content:""; position:absolute; left:7px; top:10px; bottom:10px; width:2px; background:var(--line-2);}
+  .phase .step{position:relative; margin-bottom:26px;}
+  .phase .step .d{position:absolute; left:-30px; top:4px; width:16px; height:16px; border-radius:50%; background:var(--red);}
+  .phase .step h3{font-family:"Bebas Neue"; font-size:26px; letter-spacing:.03em; margin:0;}
+  .phase .step p{font-size:14px; color:var(--muted); margin:5px 0 0; max-width:62ch;}
+
+  /* PEOPLE */
+  .pgrid{display:grid; grid-template-columns:repeat(2,1fr); gap:14px;}
+  .person{display:flex; align-items:center; gap:15px; background:var(--bg-2); border:1px solid var(--line); border-radius:var(--r); padding:15px 17px;}
+  .person.ldr{border:1px solid var(--gold); background:linear-gradient(180deg,var(--gold-bg),transparent);}
+  .av{width:48px; height:48px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-family:"Bebas Neue"; font-size:19px; letter-spacing:.04em; flex:none;}
+  .av.ldr{background:var(--gold); color:#1A1400;}
+  .av.rep{background:var(--bg-3); color:var(--gold-soft); border:1px solid var(--line-2);}
+  .person .nm{font-family:"Bebas Neue"; font-size:21px; letter-spacing:.03em; line-height:1;}
+  .person .rl{font-size:11.5px; letter-spacing:.07em; text-transform:uppercase; color:var(--muted); margin-top:4px;}
+  .person.ldr .rl{color:var(--gold-soft);}
+  .co-h{font-family:"Bebas Neue"; font-size:18px; letter-spacing:.14em; color:var(--red); margin:30px 0 14px; text-transform:uppercase;}
+
+  footer{margin:84px 0 46px; padding-top:26px; border-top:1px solid var(--line); display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--faint);}
+
+  .feed .thumb{width:34px; height:34px; border-radius:7px; object-fit:cover; flex:none;}
+  @media(max-width:840px){
+    .banner .c{max-width:100%;}
+    .banner{min-height:240px;}
+    .banner .slide{padding:24px 20px;}
+    .banner .nav-b{display:none;}
+    .banner .dots{left:20px;}
+    .menu{display:none; position:absolute; top:69px; left:0; right:0; flex-direction:column; background:var(--bg-2); border-bottom:1px solid var(--line); padding:10px 18px;}
+    .menu.open{display:flex;}
+    .menu button{text-align:left; padding:13px;}
+    .burger{display:block;}
+    .yr,.yr-logo{display:none;}
+    .g3,.g2,.pgrid{grid-template-columns:1fr;}
+    .statstrip{grid-template-columns:1fr;}
+    .statstrip .s + .s{border-left:0; border-top:1px solid var(--line);}
+    .stops{flex-direction:column; gap:28px;}
+    .rail{display:none;}
+    .stop .dot{top:0; margin-bottom:8px;}
+    .stop .co,.stop .tag,.stop .mcard{margin-top:0;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <div class="brand">
+      <img class="mark-img" src="assets/logo-icon.png" alt="Comunidade B2B Grupo José Alves">
+      <div>
+        <div class="nm">Comunidade B2B</div>
+        <div class="sb">Grupo José Alves</div>
+      </div>
+    </div>
+    <nav class="menu" id="menu">
+      <button data-page="inicio" data-n="01" class="active">Início</button>
+      <button data-page="estrategia" data-n="02">Estratégia</button>
+      <button data-page="indicadores" data-n="03">Indicadores</button>
+      <button data-page="biblioteca" data-n="04">Biblioteca</button>
+      <button data-page="comunidade" data-n="05">Comunidade</button>
+    </nav>
+    <img class="yr-logo" src="assets/logo-grupo.png" alt="Grupo José Alves">
+    <button class="burger" id="burger" aria-label="Menu">≡</button>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <!-- 01 INÍCIO -->
+  <section class="page active" id="inicio">
+    <div class="hero">
+      <div id="banner" class="banner" aria-label="Destaques"></div>
+    </div>
+
+    <div class="block">
+      <div class="hd"><h2>TRILHA DE MATURIDADE</h2><p>Onde cada empresa está hoje na jornada do grupo.</p></div>
+      <div class="track">
+        <div class="rail"><div class="fill"></div></div>
+        <div class="stops">
+          <div class="stop"><div class="dot"></div><div class="mcard"><div class="logoplate"><img src="assets/logo-nl.png" alt="N&amp;L"></div><div class="ph">Em produção · construindo histórico</div><span class="tag">Evoluindo</span></div></div>
+          <div class="stop"><div class="dot"></div><div class="mcard"><div class="logoplate"><img src="assets/logo-vitamedic.png" alt="VITAMEDIC"></div><div class="ph">Em produção · construindo histórico</div><span class="tag">Evoluindo</span></div></div>
+          <div class="stop mat"><div class="dot"></div><div class="mcard"><div class="logoplate"><img src="assets/logo-bandeirantes.png" alt="BANDEIRANTES"></div><div class="ph">No padrão KO LATAM</div><span class="tag">Referência</span></div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="block">
+      <div class="hd"><h2>STATUS DAS EMPRESAS</h2><p>Operações no ar, em níveis diferentes de maturidade.</p></div>
+      <div class="grid g3" id="status-grid"></div>
+    </div>
+
+    <div class="block">
+      <div class="hd"><h2>ÚLTIMAS ATUALIZAÇÕES</h2><p>O que se moveu na comunidade.</p></div>
+      <div class="feed" id="feed"></div>
+    </div>
+  </section>
+
+  <!-- 02 ESTRATÉGIA -->
+  <section class="page" id="estrategia">
+    <div class="hero" style="padding-bottom:0;">
+      <div class="eyebrow" data-n="02">A comunidade em três fases</div>
+      <div class="big-title">ESTRATÉGIA<br><span class="l2">B2B</span></div>
+      <p class="sub" style="margin-top:24px;">Faseada por maturidade, não por tecnologia. A casca é a mesma; muda quem preenche e em que profundidade.</p>
+    </div>
+    <div class="block">
+      <div class="card" style="padding:32px;">
+        <div class="phase">
+          <div class="step"><span class="d"></span><h3>FASE 1 — A COMUNIDADE ENSINA</h3><p>BANDEIRANTES entra com conteúdo real e serve de referência. VITAMEDIC e N&amp;L aparecem com status, responsáveis e roadmap, construindo histórico.</p></div>
+          <div class="step"><span class="d"></span><h3>FASE 2 — A COMUNIDADE ESPELHA</h3><p>VITAMEDIC e N&amp;L passam a contribuir com documentação e primeiros indicadores. O portal vira o painel de acompanhamento da diretriz do grupo.</p></div>
+          <div class="step"><span class="d"></span><h3>FASE 3 — A COMUNIDADE CONSOLIDA</h3><p>Roadmap unificado, indicadores consolidados e biblioteca de IA. As três empresas operando no mesmo padrão de métricas.</p></div>
+        </div>
+      </div>
+    </div>
+    <div class="block">
+      <div class="hd"><h2>POR QUE FASEADO</h2></div>
+      <p class="sub" style="max-width:74ch;">As três já estão em produção, mas em níveis diferentes. A BANDEIRANTES, como engarrafadora, opera há anos no padrão de métricas da Coca-Cola LATAM. VITAMEDIC e N&amp;L entraram em produção este ano e estão construindo cobertura e histórico. A comunidade transforma essa diferença em modelo: quem está à frente mostra o caminho, e todos convergem para o mesmo padrão.</p>
+    </div>
+  </section>
+
+  <!-- 03 INDICADORES -->
+  <section class="page" id="indicadores">
+    <div class="hero" style="padding-bottom:0;">
+      <div class="eyebrow" data-n="03">Report simples · padrão KO</div>
+      <div class="big-title">INDICA<span class="l2">DORES</span></div>
+      <p class="sub" style="margin-top:24px;">Mesma lógica da BANDEIRANTES — alinhada ao template oficial de métricas B2B.</p>
+    </div>
+    <div class="block">
+      <div class="note"><span>⚠</span><span>Maio/2026. BANDEIRANTES do template; VITAMEDIC em piloto (SP e GO). Falta o universo de clientes elegíveis de VITAMEDIC e N&amp;L para calcular o % cobertura.</span></div>
+      <table class="rep" id="report"></table>
+      <p class="foot">
+        <b>Base elegível</b> = universo de clientes diretos (Trad. Trade) · <b>Cadastrados</b> = Coverage (total de registros) · <b>Cobertos</b> = Monthly Buyers · <b>% cobertura</b> = cobertos ÷ base · <b>% faturamento</b> = Revenue Mix (faturamento B2B sobre a base foco).<br>
+        Os cinco campos mapeiam direto na aba PERFORMANCE do template B2B — as três empresas reportam no mesmo arquivo.
+      </p>
+    </div>
+    <div class="block">
+      <div class="hd"><h2>RELATÓRIOS MENSAIS</h2><p>Arquivos consolidados para download.</p></div>
+      <div class="grid g3" id="relatorios"></div>
+    </div>
+  </section>
+
+  <!-- 04 BIBLIOTECA -->
+  <section class="page" id="biblioteca">
+    <div class="hero" style="padding-bottom:0;">
+      <div class="eyebrow" data-n="04">Conhecimento da comunidade</div>
+      <div class="big-title">BIBLIO<span class="l2">TECA</span></div>
+      <p class="sub" style="margin-top:24px;">Boas práticas, documentos e materiais que as três empresas compartilham.</p>
+    </div>
+    <div class="block">
+      <div class="grid g3">
+        <div class="card lib"><span class="ic">◆</span><h3>B2B preserva o RCA</h3><p>Comissão 100% preservada e paridade de preço com o canal tradicional. O B2B é conveniência, não concorrência do representante.</p><span class="meta">Vale para todo o grupo</span></div>
+        <div class="card lib"><span class="ic">✦</span><h3>Boas práticas</h3><p>Padrão operacional por tema: cadastro, catálogo, cobertura e pedido sugerido.</p><span class="meta">3 publicações · BANDEIRANTES</span></div>
+        <div class="card lib"><span class="ic">▤</span><h3>Documentos</h3><p>Apresentações das empresas, manuais e templates de report.</p><span class="meta">Apresentações recebidas</span></div>
+        <div class="card lib"><span class="ic">▷</span><h3>Treinamentos</h3><p>Materiais de capacitação para os times comercial e marketing.</p><span class="meta">Em breve</span></div>
+        <div class="card lib"><span class="ic">✲</span><h3>Biblioteca de IA</h3><p>Prompts prontos para atendimento, comunicação e análise comercial.</p><span class="meta">Fase 3</span></div>
+        <div class="card lib"><span class="ic">★</span><h3>Cases de sucesso</h3><p>O que funcionou em cada empresa, pronto para replicar.</p><span class="meta">1 case · N&amp;L</span></div>
+        <div class="card lib"><span class="ic">⤓</span><h3>Template B2B</h3><p>Arquivo único de report mensal das três empresas.</p><span class="meta">Padrão do grupo</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 05 COMUNIDADE -->
+  <section class="page" id="comunidade">
+    <div class="hero" style="padding-bottom:0;">
+      <div class="eyebrow" data-n="05">Quem faz a comunidade</div>
+      <div class="big-title">COMU<span class="l2">NIDADE</span></div>
+      <p class="sub" style="margin-top:24px;">Os representantes que fazem a comunidade acontecer — e a liderança que apoia.</p>
+    </div>
+
+    <div class="block">
+      <div class="hd"><h2>REPRESENTANTES POR EMPRESA</h2></div>
+      <div class="co-h">BANDEIRANTES</div>
+      <div class="pgrid">
+        <div class="person"><div class="av rep">HU</div><div><div class="nm">Hubener</div><div class="rl">Marketing</div></div></div>
+        <div class="person"><div class="av rep">ES</div><div><div class="nm">Estella</div><div class="rl">Comercial</div></div></div>
+      </div>
+      <div class="co-h">N&amp;L</div>
+      <div class="pgrid">
+        <div class="person"><div class="av rep">AG</div><div><div class="nm">Agrimar</div><div class="rl">Comercial</div></div></div>
+        <div class="person"><div class="av rep">NA</div><div><div class="nm">Nayane</div><div class="rl">Marketing</div></div></div>
+      </div>
+      <div class="co-h">VITAMEDIC</div>
+      <div class="pgrid">
+        <div class="person"><div class="av rep">UA</div><div><div class="nm">Uandson</div><div class="rl">Comercial</div></div></div>
+        <div class="person"><div class="av rep">TH</div><div><div class="nm">Thiago</div><div class="rl">Marketing</div></div></div>
+      </div>
+    </div>
+
+    <div class="block">
+      <div class="hd"><h2>LÍDERES DO NEGÓCIO</h2><p>No apoio aos representantes.</p></div>
+      <div class="pgrid">
+        <div class="person ldr"><div class="av ldr">HU</div><div><div class="nm">Hubener</div><div class="rl">Líder do negócio</div></div></div>
+        <div class="person ldr"><div class="av ldr">KA</div><div><div class="nm">Karin</div><div class="rl">Líder do negócio</div></div></div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <span>Comunidade B2B · Grupo José Alves · Protótipo Fase 1</span>
+    <span>Evolui para SharePoint / Power Pages</span>
+  </footer>
+</main>
+
+<script>
+  const menu = document.getElementById('menu');
+  const buttons = menu.querySelectorAll('button');
+  const pages = document.querySelectorAll('.page');
+  function go(id){
+    pages.forEach(p => p.classList.toggle('active', p.id === id));
+    buttons.forEach(b => b.classList.toggle('active', b.dataset.page === id));
+    menu.classList.remove('open');
+    window.scrollTo({top:0, behavior:'smooth'});
+  }
+  buttons.forEach(b => b.addEventListener('click', () => go(b.dataset.page)));
+  document.getElementById('burger').addEventListener('click', () => menu.classList.toggle('open'));
+
+  // ---- conteúdo dinâmico (editável pelo painel /admin) ----
+  const FB_EMPRESAS = {empresas:[
+    {"nome": "BANDEIRANTES", "selo": "ref", "kpiLabel": "Clientes cobertos · mai/26", "kpi": "6.874", "barColor": "g", "barPct": 90, "resp": "Equipe B2B", "atualizado": "mai/26"},
+    {"nome": "VITAMEDIC", "selo": "prod", "kpiLabel": "Clientes no piloto SP·GO", "kpi": "191", "barColor": "y", "barPct": 25, "resp": "Uandson · Thiago", "atualizado": "piloto · jun/26"},
+    {"nome": "N&L", "selo": "prod", "kpiLabel": "Clientes cobertos · mai/26", "kpi": "691", "barColor": "y", "barPct": 60, "resp": "Agrimar · Nayane", "atualizado": "mai/26"}
+  ]};
+  const FB_NOTICIAS = {noticias:[
+    {"data": "jun/26", "categoria": "Cases", "titulo": "Case N&L: Cleiton Padilha usa os descontos do B2B para vender mais", "imagem": ""},
+    {"data": "jun/26", "categoria": "Comunidade", "titulo": "VITAMEDIC lança o VitaON: piloto SP e GO com 191 clientes e R$ 6,3 mil em pedidos", "imagem": ""},
+    {"data": "mai/26", "categoria": "Indicadores", "titulo": "N&L: 29% das vendas do canal foco já vêm do B2B", "imagem": ""},
+    {"data": "mai/26", "categoria": "Indicadores", "titulo": "N&L chega a 883 PDVs cadastrados e 691 clientes comprando no digital", "imagem": ""}
+  ]};
+  const normImg = p => p ? p.replace(/^\//,"") : "";
+  const selo = s => s==="ref"
+    ? '<span class="pill ref">Referência KO</span>'
+    : '<span class="pill prod">Em produção</span>';
+  function renderStatus(d){
+    const el=document.getElementById("status-grid"); if(!el) return;
+    el.innerHTML = d.empresas.map(e=>`
+      <div class="card co-card">
+        <div class="top"><span class="co-name">${e.nome}</span>${selo(e.selo)}</div>
+        <div class="kpi-l">${e.kpiLabel||""}</div>
+        <div class="kpi ${e.kpi?"":"dim"}">${e.kpi||"—"}</div>
+        <div class="bar"><i class="${e.barColor||"y"}" style="width:${e.barPct||0}%"></i></div>
+        <div class="co-meta"><span>${e.resp||""}</span><span>${e.atualizado||""}</span></div>
+      </div>`).join("");
+  }
+  function renderFeed(d){
+    const el=document.getElementById("feed"); if(!el) return;
+    el.innerHTML = d.noticias.map(n=>`
+      <div class="row">
+        ${n.imagem?`<img class="thumb" src="${normImg(n.imagem)}" alt="">`:'<span class="ic">▣</span>'}
+        <span class="txt">${n.titulo||""}</span>
+        <span class="cat">${n.categoria||""}</span>
+      </div>`).join("");
+  }
+  async function loadJSON(path, fb){
+    try{ const r=await fetch(path,{cache:"no-store"}); if(!r.ok) throw 0; return await r.json(); }
+    catch(e){ return fb; }
+  }
+  const FB_REPORT = {mes:"mai/26", linhas:[
+    {"empresa": "BANDEIRANTES", "base": "24.755", "cadastrados": "16.336", "cobertos": "6.874", "cobertura": "27,8%", "faturamento": "a consolidar"},
+    {"empresa": "VITAMEDIC", "base": "aguardando", "cadastrados": "191", "cobertos": "aguardando", "cobertura": "—", "faturamento": "—"},
+    {"empresa": "N&L", "base": "aguardando", "cadastrados": "883", "cobertos": "691", "cobertura": "—", "faturamento": "29%"}
+  ]};
+  const FB_RELATORIOS = {relatorios:[]};
+  function cellR(v){
+    v=(v==null?"":v).toString().trim();
+    if(!v || /aguard|consolid|^—$/i.test(v)) return `<td class="wait">${v||"—"}</td>`;
+    return `<td class="num">${v}</td>`;
+  }
+  function renderReport(d){
+    const el=document.getElementById("report"); if(!el) return;
+    const head='<thead><tr><th>Empresa</th><th>Base elegível</th><th>Cadastrados</th><th>Cobertos</th><th>% cobertura</th><th>% faturamento</th></tr></thead>';
+    const body='<tbody>'+(d.linhas||[]).map(l=>`<tr><td>${l.empresa||""}</td>${cellR(l.base)}${cellR(l.cadastrados)}${cellR(l.cobertos)}${cellR(l.cobertura)}${cellR(l.faturamento)}</tr>`).join('')+'</tbody>';
+    el.innerHTML=head+body;
+  }
+  function renderRelatorios(d){
+    const el=document.getElementById("relatorios"); if(!el) return;
+    const list=d.relatorios||[];
+    if(!list.length){ el.innerHTML='<div class="card lib"><span class="ic">⤓</span><h3>Nenhum relatório ainda</h3><p>Os relatórios mensais aparecerão aqui assim que forem enviados pelo painel.</p><span class="meta">Aguardando envio</span></div>'; return; }
+    el.innerHTML=list.map(r=>`<a class="card lib" style="text-decoration:none" href="${normImg(r.arquivo)}" download><span class="ic">⤓</span><h3>${r.mes||"Relatório"}</h3><p>${r.obs||"Baixar relatório mensal B2B."}</p><span class="meta">Baixar arquivo</span></a>`).join('');
+  }
+  const FB_BANNERS = {banners:[
+    {eyebrow:"Centro de Excelência B2B · 2026", titulo:"Três empresas. Uma jornada B2B.", subtitulo:"BANDEIRANTES, VITAMEDIC e N&L num só padrão de métricas e boas práticas.", imagem:"", cta:"", link:""},
+    {eyebrow:"Case · N&L", titulo:"Cleiton Padilha vende mais com o B2B", subtitulo:"O primeiro case da comunidade, usando os descontos do canal digital.", imagem:"", cta:"", link:""},
+    {eyebrow:"VITAMEDIC · VitaON", titulo:"Piloto SP e GO no ar", subtitulo:"191 clientes e R$ 6,3 mil em pedidos na largada.", imagem:"", cta:"", link:""}
+  ]};
+  function renderBanner(d){
+    const el=document.getElementById("banner"); if(!el) return;
+    const list=(d.banners||[]).filter(b=>b && (b.titulo||b.imagem));
+    if(!list.length){ el.style.display="none"; return; }
+    el.innerHTML = list.map((b,i)=>`
+      <div class="slide ${i===0?"on":""}">
+        ${b.imagem?`<div class="bg" style="background-image:url('${normImg(b.imagem)}')"></div><div class="scrim"></div>`:'<div class="scrim noimg"></div>'}
+        <div class="c">
+          ${b.eyebrow?`<div class="eyb">${b.eyebrow}</div>`:""}
+          <h2 class="bt">${b.titulo||""}</h2>
+          ${b.subtitulo?`<div class="bs">${b.subtitulo}</div>`:""}
+          ${b.link?`<a class="cta" href="${b.link}">${b.cta||"Ver mais"}</a>`:""}
+        </div>
+      </div>`).join("")
+      + (list.length>1 ? `<button class="nav-b prev" aria-label="Anterior">‹</button><button class="nav-b next" aria-label="Próximo">›</button><div class="dots">${list.map((_,i)=>`<b class="${i===0?"on":""}" data-i="${i}"></b>`).join("")}</div>` : "");
+    const slides=[...el.querySelectorAll(".slide")];
+    const dots=[...el.querySelectorAll(".dots b")];
+    let idx=0, timer;
+    function show(n){ idx=(n+slides.length)%slides.length; slides.forEach((sl,i)=>sl.classList.toggle("on",i===idx)); dots.forEach((dt,i)=>dt.classList.toggle("on",i===idx)); }
+    function play(){ if(slides.length>1){ clearInterval(timer); timer=setInterval(()=>show(idx+1),6000); } }
+    el.querySelector(".next")?.addEventListener("click",()=>{show(idx+1);play();});
+    el.querySelector(".prev")?.addEventListener("click",()=>{show(idx-1);play();});
+    dots.forEach(dt=>dt.addEventListener("click",()=>{show(+dt.dataset.i);play();}));
+    play();
+  }
+  (async()=>{
+    renderBanner(await loadJSON("content/banners.json", FB_BANNERS));
+    renderStatus(await loadJSON("content/empresas.json", FB_EMPRESAS));
+    renderFeed(await loadJSON("content/noticias.json", FB_NOTICIAS));
+    renderReport(await loadJSON("content/indicadores.json", FB_REPORT));
+    renderRelatorios(await loadJSON("content/relatorios.json", FB_RELATORIOS));
+  })();
+</script>
+</body>
+</html>
