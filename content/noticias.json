@@ -1,0 +1,28 @@
+{
+  "noticias": [
+    {
+      "data": "jun/26",
+      "categoria": "Cases",
+      "titulo": "Case N&L: Cleiton Padilha usa os descontos do B2B para vender mais",
+      "imagem": ""
+    },
+    {
+      "data": "jun/26",
+      "categoria": "Comunidade",
+      "titulo": "VITAMEDIC lança o VitaON: piloto SP e GO com 191 clientes e R$ 6,3 mil em pedidos",
+      "imagem": ""
+    },
+    {
+      "data": "mai/26",
+      "categoria": "Indicadores",
+      "titulo": "N&L: 29% das vendas do canal foco já vêm do B2B",
+      "imagem": ""
+    },
+    {
+      "data": "mai/26",
+      "categoria": "Indicadores",
+      "titulo": "N&L chega a 883 PDVs cadastrados e 691 clientes comprando no digital",
+      "imagem": ""
+    }
+  ]
+}

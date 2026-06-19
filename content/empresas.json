@@ -1,0 +1,34 @@
+{
+  "empresas": [
+    {
+      "nome": "BANDEIRANTES",
+      "selo": "ref",
+      "kpiLabel": "Clientes cobertos · mai/26",
+      "kpi": "6.874",
+      "barColor": "g",
+      "barPct": 90,
+      "resp": "Equipe B2B",
+      "atualizado": "mai/26"
+    },
+    {
+      "nome": "VITAMEDIC",
+      "selo": "prod",
+      "kpiLabel": "Clientes no piloto SP·GO",
+      "kpi": "191",
+      "barColor": "y",
+      "barPct": 25,
+      "resp": "Uandson · Thiago",
+      "atualizado": "piloto · jun/26"
+    },
+    {
+      "nome": "N&L",
+      "selo": "prod",
+      "kpiLabel": "Clientes cobertos · mai/26",
+      "kpi": "691",
+      "barColor": "y",
+      "barPct": 60,
+      "resp": "Agrimar · Nayane",
+      "atualizado": "mai/26"
+    }
+  ]
+}

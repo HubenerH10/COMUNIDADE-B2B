@@ -1,0 +1,29 @@
+{
+  "mes": "mai/26",
+  "linhas": [
+    {
+      "empresa": "BANDEIRANTES",
+      "base": "24.755",
+      "cadastrados": "16.336",
+      "cobertos": "6.874",
+      "cobertura": "27,8%",
+      "faturamento": "a consolidar"
+    },
+    {
+      "empresa": "VITAMEDIC",
+      "base": "aguardando",
+      "cadastrados": "191",
+      "cobertos": "aguardando",
+      "cobertura": "—",
+      "faturamento": "—"
+    },
+    {
+      "empresa": "N&L",
+      "base": "aguardando",
+      "cadastrados": "883",
+      "cobertos": "691",
+      "cobertura": "—",
+      "faturamento": "29%"
+    }
+  ]
+}

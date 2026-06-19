@@ -1,0 +1,65 @@
+# ===========================================================
+#  Configuração do painel de edição (Sveltia CMS)
+#  ALTERE as duas linhas marcadas com  # <-- ALTERAR
+# ===========================================================
+backend:
+  name: github
+  repo: hubenerh10/comunidade-b2b        # <-- ALTERAR: seu-usuario/seu-repositorio
+  branch: main
+  base_url: https://SEU-AUTH.workers.dev  # <-- ALTERAR: endereço do login (ver README)
+
+media_folder: content/uploads
+public_folder: /content/uploads
+
+collections:
+  - name: empresas
+    label: Status das empresas
+    files:
+      - name: empresas
+        label: Empresas
+        file: content/empresas.json
+        fields:
+          - label: Empresas
+            name: empresas
+            widget: list
+            fields:
+              - { label: Nome, name: nome, widget: string }
+              - label: Estágio
+                name: selo
+                widget: select
+                default: prod
+                options:
+                  - { label: "Referência KO", value: "ref" }
+                  - { label: "Em produção", value: "prod" }
+              - { label: Rótulo do indicador, name: kpiLabel, widget: string, default: "Clientes cobertos" }
+              - { label: Indicador (número), name: kpi, widget: string, required: false }
+              - label: Cor da barra
+                name: barColor
+                widget: select
+                default: y
+                options:
+                  - { label: "Verde (maduro)", value: "g" }
+                  - { label: "Âmbar (evoluindo)", value: "y" }
+              - { label: "Barra (%)", name: barPct, widget: number, default: 40, value_type: int, min: 0, max: 100 }
+              - { label: Responsáveis, name: resp, widget: string }
+              - { label: Atualizado em, name: atualizado, widget: string, default: "hoje" }
+
+  - name: noticias
+    label: Notícias e atualizações
+    files:
+      - name: noticias
+        label: Lista de notícias
+        file: content/noticias.json
+        fields:
+          - label: Notícias
+            name: noticias
+            label_singular: Notícia
+            widget: list
+            fields:
+              - { label: Data, name: data, widget: string, required: false, hint: "Ex.: 19/06/2026" }
+              - label: Categoria
+                name: categoria
+                widget: select
+                options: ["Boas práticas", "Calendário", "Indicadores", "Comunidade", "Comunicado"]
+              - { label: Título, name: titulo, widget: string }
+              - { label: Imagem, name: imagem, widget: image, required: false }
